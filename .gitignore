@@ -1,0 +1,41 @@
+# Node e dependências
+/node_modules
+/.pnp
+.pnp.js
+
+# Cobertura de testes
+/coverage
+
+# Build do Next.js
+/.next/
+/out/
+/build
+
+# Sistema
+.DS_Store
+*.pem
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Variáveis de ambiente
+.env*.local
+
+# Vercel
+.vercel
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Arquivos de configuração
+.eslintrc.json
+next.config.js
+package-lock.json
+package.json
+portfolio.code-workspace
+postcss.config.js
+tailwind.config.js
+tsconfig.json
