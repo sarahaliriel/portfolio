@@ -53,10 +53,14 @@ export const sendEmail = async (formData: FormData) => {
   const safeSenderName =
     validateString(senderName, 120) && senderName.length >= 2 ? senderName : "Anônimo";
 
+  const toEmail = (process.env.CONTACT_TO_EMAIL || "dumitrachefilha@gmail.com").trim();
+  const fromEmail = (process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev").trim();
+  const fromName = (process.env.RESEND_FROM_NAME || "Portfólio Sarah").trim();
+
   try {
     const data = await resend.emails.send({
-      from: "Portfólio Sarah <onboarding@resend.dev>",
-      to: "dumitrachebusiness@gmail.com",
+      from: `${fromName} <${fromEmail}>`,
+      to: toEmail,
       subject: `Nova mensagem do portfólio — ${safeSenderName}`,
       reply_to: senderEmail,
       react: React.createElement(ContactFormEmail, {
