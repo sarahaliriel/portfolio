@@ -5,25 +5,13 @@ import SectionHeading from "./section-heading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { FiCode, FiLayers, FiTarget } from "react-icons/fi";
-
-function splitLines(text: string) {
-  return text
-    .split(/\n+/)
-    .map((t) => t.trim())
-    .filter(Boolean);
-}
+import { useLanguage } from "@/context/language-context";
 
 export default function About() {
-  const { ref } = useSectionInView("Sobre");
+  const { ref } = useSectionInView("about");
+  const { t } = useLanguage();
 
-  const headline = useMemo(
-    () =>
-      splitLines(
-        `Dedico-me a aplicar meus conhecimentos em projetos práticos, com foco na criação de interfaces funcionais, responsivas e centradas no utilizador.Gosto de transformar ideias em soluções digitais, combinando programação, design e usabilidade. Estou sempre em busca de novos desafios e oportunidades para evoluir como desenvolvedora e contribuir com projetos com impacto real.
-        Quando não estou "codando", gosto de ver filmes, ler livros, editar vídeos e ouvir música. Valorizo o aprendizado contínuo e tenho prazer em adquirir novos conhecimentos, tanto na área tecnológica quanto em outros contextos criativos.`
-      ),
-    []
-  );
+  const paragraphs = useMemo(() => [t("about.p1"), t("about.p2"), t("about.p3")], [t]);
 
   const container = {
     hidden: { opacity: 0, y: 18 },
@@ -57,21 +45,21 @@ export default function About() {
     () => [
       {
         icon: <FiCode className="text-[1.15rem] text-black/70 dark:text-white/80" />,
-        title: "Código",
-        desc: "Componentização, boas práticas e performance.",
+        title: t("about.card1.title"),
+        desc: t("about.card1.desc"),
       },
       {
         icon: <FiLayers className="text-[1.15rem] text-black/70 dark:text-white/80" />,
-        title: "Design",
-        desc: "UI consistente com animações elegantes.",
+        title: t("about.card2.title"),
+        desc: t("about.card2.desc"),
       },
       {
         icon: <FiTarget className="text-[1.15rem] text-black/70 dark:text-white/80" />,
-        title: "Propósito",
-        desc: "Soluções úteis com foco na experiência real.",
+        title: t("about.card3.title"),
+        desc: t("about.card3.desc"),
       },
     ],
-    []
+    [t]
   );
 
   return (
@@ -84,28 +72,25 @@ export default function About() {
       whileInView="show"
       viewport={{ once: true, amount: 0.45 }}
     >
-      <SectionHeading>Sobre mim</SectionHeading>
+      <SectionHeading>{t("about.heading")}</SectionHeading>
 
       <div className="mx-auto mt-6 max-w-[46rem]">
         <div className="mx-auto mb-8 h-[2px] w-24 rounded-full bg-black/20 dark:bg-white/20" />
 
         <div className="flex flex-col gap-5">
-          {headline.map((t, i) => (
+          {paragraphs.map((text, i) => (
             <motion.p
               key={i}
               variants={line}
               className="text-[1.02rem] sm:text-[1.05rem] text-black/80 dark:text-white/80"
             >
-              {t}
+              {text}
             </motion.p>
           ))}
         </div>
       </div>
 
-      <motion.div
-        className="mx-auto mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3"
-        variants={cards}
-      >
+      <motion.div className="mx-auto mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3" variants={cards}>
         {pillars.map((p, i) => (
           <motion.div
             key={i}
@@ -116,21 +101,14 @@ export default function About() {
             <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-black/5 dark:bg-white/10">
               {p.icon}
             </div>
-            <h3 className="text-[1.05rem] font-semibold text-black/90 dark:text-white">
-              {p.title}
-            </h3>
-            <p className="mt-2 text-sm text-black/65 dark:text-white/65">
-              {p.desc}
-            </p>
+            <h3 className="text-[1.05rem] font-semibold text-black/90 dark:text-white">{p.title}</h3>
+            <p className="mt-2 text-sm text-black/65 dark:text-white/65">{p.desc}</p>
           </motion.div>
         ))}
       </motion.div>
 
-      <motion.p
-        variants={line}
-        className="mx-auto mt-10 max-w-[44rem] text-sm text-black/55 dark:text-white/55"
-      >
-        Se você procura alguém que une design, código e propósito, talvez a gente combine.
+      <motion.p variants={line} className="mx-auto mt-10 max-w-[44rem] text-sm text-black/55 dark:text-white/55">
+        {t("about.cta")}
       </motion.p>
     </motion.section>
   );

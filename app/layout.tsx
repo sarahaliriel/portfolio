@@ -5,9 +5,12 @@ import ActiveSectionContextProvider from "@/context/active-section-context";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
+import LanguageContextProvider from "@/context/language-context";
+import LanguageSwitch from "@/components/language-switch";
 import { Toaster } from "react-hot-toast";
 import CustomCursor from "@/components/custom-cursor";
 import { FooterBlur } from "@/components/footerblurr";
+import FixedButtons from "@/components/fixed-buttons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +20,9 @@ export const metadata = {
   icons: "/favicon.ico?v=1",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-br" className="!scroll-smooth">
+    <html lang="pt" className="!scroll-smooth">
       <body
         className={`
           ${inter.className}
@@ -39,7 +38,6 @@ export default function RootLayout({
           relative
         `}
       >
-
         <div className="bg-grain" />
 
         <div
@@ -75,18 +73,21 @@ export default function RootLayout({
         <CustomCursor />
 
         <ThemeContextProvider>
-          <ActiveSectionContextProvider>
-            <Header />
+          <LanguageContextProvider>
+            <ActiveSectionContextProvider>
+              <Header />
 
-            <main className="flex-1 pt-28 sm:pt-36">
-              {children}
-              <FooterBlur />
-            </main>
-            <Footer />
+              <main className="flex-1 pt-28 sm:pt-36">
+                {children}
+                <FooterBlur />
+              </main>
 
-            <ThemeSwitch />
-            <Toaster position="top-right" />
-          </ActiveSectionContextProvider>
+              <Footer />
+              <FixedButtons />
+
+              <Toaster position="top-right" />
+            </ActiveSectionContextProvider>
+          </LanguageContextProvider>
         </ThemeContextProvider>
       </body>
     </html>

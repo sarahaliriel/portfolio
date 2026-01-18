@@ -1,3 +1,3 @@
-import { links } from "./data";
+import { sections } from "./data";
 
-export type SectionName = (typeof links)[number]["name"];
+export type SectionId = (typeof sections)[number]["id"];

@@ -1,6 +1,6 @@
 "use client";
 
-import type { SectionName } from "@/lib/types";
+import type { SectionId } from "@/lib/types";
 import React, { useState, createContext, useContext } from "react";
 
 type ActiveSectionContextProviderProps = {
@@ -8,30 +8,20 @@ type ActiveSectionContextProviderProps = {
 };
 
 type ActiveSectionContextType = {
-  activeSection: SectionName;
-  setActiveSection: React.Dispatch<React.SetStateAction<SectionName>>;
+  activeSection: SectionId;
+  setActiveSection: React.Dispatch<React.SetStateAction<SectionId>>;
   timeOfLastClick: number;
   setTimeOfLastClick: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const ActiveSectionContext =
-  createContext<ActiveSectionContextType | null>(null);
+export const ActiveSectionContext = createContext<ActiveSectionContextType | null>(null);
 
-export default function ActiveSectionContextProvider({
-  children,
-}: ActiveSectionContextProviderProps) {
-  const [activeSection, setActiveSection] = useState<SectionName>("Início");
-  const [timeOfLastClick, setTimeOfLastClick] = useState(0); 
+export default function ActiveSectionContextProvider({ children }: ActiveSectionContextProviderProps) {
+  const [activeSection, setActiveSection] = useState<SectionId>("home");
+  const [timeOfLastClick, setTimeOfLastClick] = useState(0);
 
   return (
-    <ActiveSectionContext.Provider
-      value={{
-        activeSection,
-        setActiveSection,
-        timeOfLastClick,
-        setTimeOfLastClick,
-      }}
-    >
+    <ActiveSectionContext.Provider value={{ activeSection, setActiveSection, timeOfLastClick, setTimeOfLastClick }}>
       {children}
     </ActiveSectionContext.Provider>
   );
@@ -39,12 +29,6 @@ export default function ActiveSectionContextProvider({
 
 export function useActiveSectionContext() {
   const context = useContext(ActiveSectionContext);
-
-  if (context === null) {
-    throw new Error(
-      "useActiveSectionContext must be used within an ActiveSectionContextProvider"
-    );
-  }
-
+  if (context === null) throw new Error("useActiveSectionContext must be used within an ActiveSectionContextProvider");
   return context;
 }

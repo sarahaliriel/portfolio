@@ -4,6 +4,8 @@ import ThemeContextProvider from "@/context/theme-context";
 import '../globals.css';
 import CustomCursor from '@/components/custom-cursor';
 import ActiveSectionContextProvider from "@/context/active-section-context";
+import LanguageContextProvider from "@/context/language-context";
+import LanguageSwitch from "@/components/language-switch";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +19,17 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
         <div className="bg-[#101c3d] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#AA9D8D]"></div>
 
         <CustomCursor />
+
         <ThemeContextProvider>
+          <LanguageContextProvider>
           <ActiveSectionContextProvider>
             <div className="flex flex-col items-center justify-center text-center px-6">
               {children}
             </div>
+            <LanguageSwitch />
             <ThemeSwitch />
-          </ActiveSectionContextProvider>
+           </ActiveSectionContextProvider>
+          </LanguageContextProvider>
         </ThemeContextProvider>
       </body>
     </html>

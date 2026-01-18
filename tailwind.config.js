@@ -1,5 +1,5 @@
 module.exports = {
-  darkMode: "class", // ESSENCIAL para funcionar com ThemeContext
+  darkMode: "class",
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

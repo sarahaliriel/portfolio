@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import SectionHeading from "./section-heading";
-import { projectsData } from "@/lib/data";
+import { getProjectsData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { useLanguage } from "@/context/language-context";
 
 type ProjectItem = {
   title: string;
@@ -33,7 +34,7 @@ function getDemoHref(item: ProjectItem) {
   return item.liveUrl;
 }
 
-function SpotlightCard({ item }: { item: ProjectItem }) {
+function SpotlightCard({ item, labels }: { item: ProjectItem; labels: { github: string; demo: string } }) {
   const demoHref = getDemoHref(item);
 
   return (
@@ -59,13 +60,9 @@ function SpotlightCard({ item }: { item: ProjectItem }) {
         </div>
 
         <div className="p-6 sm:p-7 text-left">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-3 dark:text-white">
-            {item.title}
-          </h3>
+          <h3 className="text-2xl sm:text-3xl font-bold mb-3 dark:text-white">{item.title}</h3>
 
-          <p className="text-gray-700 dark:text-white/70 leading-relaxed">
-            {item.description}
-          </p>
+          <p className="text-gray-700 dark:text-white/70 leading-relaxed">{item.description}</p>
 
           {item.tags && item.tags.length > 0 && (
             <ul className="flex flex-wrap gap-2 mt-5">
@@ -103,7 +100,7 @@ function SpotlightCard({ item }: { item: ProjectItem }) {
                   transition
                 "
               >
-                <FaGithub /> GitHub
+                <FaGithub /> {labels.github}
               </motion.a>
             )}
 
@@ -120,7 +117,7 @@ function SpotlightCard({ item }: { item: ProjectItem }) {
                         transition
                       "
                     >
-                      <FaExternalLinkAlt /> Demo
+                      <FaExternalLinkAlt /> {labels.demo}
                     </Link>
                   </motion.div>
                 ) : (
@@ -137,7 +134,7 @@ function SpotlightCard({ item }: { item: ProjectItem }) {
                       transition
                     "
                   >
-                    <FaExternalLinkAlt /> Demo
+                    <FaExternalLinkAlt /> {labels.demo}
                   </motion.a>
                 )}
               </>
@@ -150,8 +147,9 @@ function SpotlightCard({ item }: { item: ProjectItem }) {
 }
 
 export default function Projects() {
-  const { ref: inViewRef } = useSectionInView("Projetos", 0.45);
+  const { ref: inViewRef } = useSectionInView("projects", 0.45);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const { lang, t } = useLanguage();
 
   const setRefs = useCallback(
     (node: HTMLElement | null) => {
@@ -161,7 +159,7 @@ export default function Projects() {
     [inViewRef]
   );
 
-  const items = projectsData as unknown as ProjectItem[];
+  const items = useMemo(() => getProjectsData(lang) as unknown as ProjectItem[], [lang]);
   const total = items.length;
 
   const { scrollYProgress } = useScroll({
@@ -187,15 +185,21 @@ export default function Projects() {
 
   const active = items[activeIndex];
 
+  const labels = useMemo(
+    () => ({
+      project: t("projects.project"),
+      active: t("projects.active"),
+      github: t("projects.github"),
+      demo: t("projects.demo"),
+    }),
+    [t]
+  );
+
   return (
-    <section
-      ref={setRefs}
-      id="projects"
-      className="py-10 md:py-16 lg:py-20 scroll-mt-28"
-    >
+    <section ref={setRefs} id="projects" className="py-10 md:py-16 lg:py-20 scroll-mt-28">
       <div className="container mx-auto px-4">
         <div className="mb-10 text-center">
-          <SectionHeading>Projetos</SectionHeading>
+          <SectionHeading>{t("projects.heading")}</SectionHeading>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -224,24 +228,20 @@ export default function Projects() {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-[0.72rem] uppercase tracking-widest text-gray-500 dark:text-white/40">
-                            Projeto {String(i + 1).padStart(2, "0")}
+                            {labels.project} {String(i + 1).padStart(2, "0")}
                           </p>
-                          <h4 className="text-lg font-bold text-gray-900 dark:text-white mt-1">
-                            {item.title}
-                          </h4>
+                          <h4 className="text-lg font-bold text-gray-900 dark:text-white mt-1">{item.title}</h4>
                         </div>
 
                         <motion.span
                           animate={{ opacity: isActive ? 1 : 0 }}
                           className="text-xs font-semibold text-gray-700 dark:text-white/70"
                         >
-                          Ativo
+                          {labels.active}
                         </motion.span>
                       </div>
 
-                      <p className="mt-2 text-sm text-gray-600 dark:text-white/60 line-clamp-2">
-                        {item.description}
-                      </p>
+                      <p className="mt-2 text-sm text-gray-600 dark:text-white/60 line-clamp-2">{item.description}</p>
                     </motion.button>
                   );
                 })}
@@ -258,7 +258,7 @@ export default function Projects() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <SpotlightCard item={active} />
+                  <SpotlightCard item={active} labels={{ github: labels.github, demo: labels.demo }} />
                 </motion.div>
               )}
             </div>
