@@ -127,7 +127,7 @@ export default function CustomCursor() {
           text-white dark:text-black
         `}
       >
-        Ver
+        View
       </span>
     </div>
   );

@@ -44,7 +44,7 @@ export default function Contact() {
         >
           <input
             type="text"
-            name="name"
+            name="senderName"
             placeholder={t("contact.name")}
             required
             maxLength={100}
