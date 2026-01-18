@@ -35,7 +35,7 @@ export const sendEmail = async (formData: FormData) => {
       react: React.createElement(ContactFormEmail, {
         message: message as string,
         senderEmail: senderEmail as string,
-        senderName: safeSenderName,
+        senderName: senderName as string,
       }),
     });
   } catch (error: unknown) {

@@ -1,6 +1,6 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 * {
   cursor: none !important;
@@ -15,10 +15,17 @@
 html {
   --line-color: #101c3d;
   scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
 html.dark {
-  --line-color: #AA9D8D;
+  --line-color: #aa9d8d;
 }
 
 ::selection {
@@ -32,7 +39,7 @@ html.dark {
 }
 
 .dark ::selection {
-  background-color: #AA9D8D;
+  background-color: #aa9d8d;
   color: #000000;
 }
 
@@ -50,34 +57,20 @@ html.dark {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 250vh;
+  right: 0;
+  height: clamp(60rem, 150vh, 90rem);
   z-index: -30;
+  pointer-events: none;
 
-  background-image: radial-gradient(
-    rgba(0, 0, 0, 0.12) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 
-  mask-image: linear-gradient(
-    to bottom,
-    black 0%,
-    black 40%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
   -webkit-mask-image: linear-gradient(
     to bottom,
     black 0%,
-    black 40%,
+    black 55%,
     transparent 100%
-  );
-}
-
-.dark .bg-dots::before {
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.12) 1px,
-    transparent 1px
   );
 }
 
@@ -89,8 +82,14 @@ html.dark {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fadeIn {
@@ -105,7 +104,7 @@ html.dark {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #AA9D8D;
+  color: #aa9d8d;
 }
 
 .loading-dots {
@@ -132,7 +131,9 @@ html.dark {
 }
 
 @keyframes bounce {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     transform: translateY(0);
     opacity: 0.3;
   }
@@ -145,21 +146,173 @@ html.dark {
 .chat-scroll::-webkit-scrollbar {
   width: 6px;
 }
-
 .chat-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .chat-scroll::-webkit-scrollbar-thumb {
-  background-color: #AA9D8D;
+  background-color: #aa9d8d;
   border-radius: 999px;
 }
-
 .chat-scroll::-webkit-scrollbar-thumb:hover {
   background-color: #9a8c7d;
 }
-
 .chat-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #AA9D8D transparent;
+  scrollbar-color: #aa9d8d transparent;
+}
+
+@keyframes blobOrbitA {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  20% {
+    transform: translate3d(120px, -60px, 0) scale(1.18) rotate(10deg);
+  }
+  50% {
+    transform: translate3d(-90px, 80px, 0) scale(0.95) rotate(-12deg);
+  }
+  80% {
+    transform: translate3d(70px, 40px, 0) scale(1.12) rotate(8deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes blobOrbitB {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(-140px, 60px, 0) scale(1.22) rotate(-14deg);
+  }
+  55% {
+    transform: translate3d(110px, 110px, 0) scale(0.92) rotate(16deg);
+  }
+  85% {
+    transform: translate3d(-60px, -80px, 0) scale(1.14) rotate(-10deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes blobOrbitC {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(90px, 110px, 0) scale(1.16) rotate(12deg);
+  }
+  60% {
+    transform: translate3d(-130px, -40px, 0) scale(0.94) rotate(-18deg);
+  }
+  90% {
+    transform: translate3d(60px, -90px, 0) scale(1.1) rotate(8deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+.bg-blob {
+  will-change: transform;
+  filter: blur(11rem) saturate(1.35);
+  opacity: 0.92;
+  transform-origin: center;
+}
+
+.bg-blob--blend {
+  mix-blend-mode: multiply;
+}
+
+html.dark .bg-blob--blend {
+  mix-blend-mode: screen;
+}
+
+.bg-blob--1 {
+  animation: blobOrbitA 13s ease-in-out infinite;
+}
+.bg-blob--2 {
+  animation: blobOrbitB 16s ease-in-out infinite;
+  animation-delay: -6s;
+}
+.bg-blob--3 {
+  animation: blobOrbitC 19s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+@keyframes grainMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(-6%, 4%, 0);
+  }
+  40% {
+    transform: translate3d(5%, -7%, 0);
+  }
+  60% {
+    transform: translate3d(-4%, -3%, 0);
+  }
+  80% {
+    transform: translate3d(7%, 6%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.bg-grain {
+  position: fixed;
+  inset: -40%;
+  z-index: -5;
+  pointer-events: none;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  animation: grainMove 7s steps(2) infinite;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(0, 0, 0, 0.12) 0.5px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(0, 0, 0, 0.1) 0.6px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(0, 0, 0, 0.08) 0.7px,
+      transparent 1px
+    );
+  background-size: 140px 140px, 180px 180px, 220px 220px;
+}
+
+html.dark .bg-grain {
+  opacity: 0.1;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 255, 255, 0.1) 0.5px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.08) 0.6px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(255, 255, 255, 0.06) 0.7px,
+      transparent 1px
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob--1,
+  .bg-blob--2,
+  .bg-blob--3,
+  .bg-grain {
+    animation: none !important;
+  }
 }

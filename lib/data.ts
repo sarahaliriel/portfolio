@@ -60,19 +60,20 @@ export const experiencesData = [
 
 export const projectsData = [
   {
+
+    title: "HonnePay",
+    description: "Plataforma interativa de pagamentos instantâneos via Pix criada em equipa, que permite os usuários receberem contribuições de forma prática e visualmente envolvente. Com layouts personalizáveis, notificações em tempo real e suporte a mensagens, o projeto combina design moderno e tecnologia web para uma experiência dinâmica e divertida.",
+    tags: ["EJS", "Tailwind CSS", "JavaScript"],
+    imageUrl: honnepayImg,
+    liveUrl: "https://honnepay.com/",
+    isExternal: false,
+  },
+  {
     title: "Em Desenvolvimento",
     description: "Em Breve",
     imageUrl: demoImg,
     githubUrl: "https://github.com/sarahaliriel",
     liveUrl: "/demo",
-    isExternal: false,
-  },
-  {
-    title: "HonnePay",
-    description: "Plataforma interativa de pagamentos instantâneos via Pix criada em equipa, que permite os usuários receberem contribuições de forma prática e visualmente envolvente. Com layouts personalizáveis, notificações em tempo real e suporte a mensagens, o projeto combina design moderno e tecnologia web para uma experiência dinâmica e divertida.",
-    tags: ["EJS", "Tailwind CSS", "JavaScript"],
-    imageUrl: honnepayImg,
-    liveUrl: "./demo",
     isExternal: false,
   },
   {

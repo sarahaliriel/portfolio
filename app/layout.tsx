@@ -1,39 +1,93 @@
 import Header from "@/components/header";
-import './globals.css';
+import "./globals.css";
 import { Inter } from "next/font/google";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
-import CustomCursor from '@/components/custom-cursor';
+import CustomCursor from "@/components/custom-cursor";
+import { FooterBlur } from "@/components/footerblurr";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Sarah Aliriel - Portfólio',
-  description: 'Portfólio pessoal de uma desenvolvedora web.',
-  icons: '/favicon.ico?v=1',
+  title: "Sarah Aliriel",
+  description: "Portfólio pessoal de uma desenvolvedora web.",
+  icons: "/favicon.ico?v=1",
 };
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-br" className="!scroll-smooth">
-    <body
-  className={`${inter.className} bg-dots bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 transition-colors duration-500 dark:bg-black dark:text-white`}>
-     <div className="bg-[#101c3d] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#AA9D8D]"></div>
-     <div className="bg-[#AA9D8D] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#101c3d]"></div>
+      <body
+        className={`
+          ${inter.className}
+          bg-dots
+          bg-gray-50
+          text-gray-950
+          transition-colors duration-500
+          dark:bg-black
+          dark:text-white
+          min-h-screen
+          flex flex-col
+          overflow-x-hidden
+          relative
+        `}
+      >
 
-      <CustomCursor />
+        <div className="bg-grain" />
+
+        <div
+          className="
+            absolute -z-10 top-[-10rem] right-[-8rem]
+            h-[34rem] w-[34rem] sm:h-[46rem] sm:w-[46rem] lg:h-[56rem] lg:w-[56rem]
+            rounded-full
+            bg-[#101c3d] dark:bg-[#AA9D8D]
+            bg-blob bg-blob--blend bg-blob--1
+          "
+        />
+
+        <div
+          className="
+            absolute -z-10 top-[-6rem] left-[-18rem] sm:left-[-26rem]
+            h-[30rem] w-[44rem] sm:h-[42rem] sm:w-[70rem]
+            rounded-full
+            bg-[#AA9D8D] dark:bg-[#101c3d]
+            bg-blob bg-blob--blend bg-blob--2
+          "
+        />
+
+        <div
+          className="
+            absolute -z-10 top-[6rem] left-[20%] sm:left-[28%]
+            h-[26rem] w-[26rem] sm:h-[34rem] sm:w-[34rem] lg:h-[40rem] lg:w-[40rem]
+            rounded-full
+            bg-[#101c3d] dark:bg-[#AA9D8D]
+            bg-blob bg-blob--blend bg-blob--3
+          "
+        />
+
+        <CustomCursor />
+
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
             <Header />
-            {children}
+
+            <main className="flex-1 pt-28 sm:pt-36">
+              {children}
+              <FooterBlur />
+            </main>
             <Footer />
-            <Toaster position="top-right" />
+
             <ThemeSwitch />
+            <Toaster position="top-right" />
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
-
       </body>
     </html>
   );

@@ -7,7 +7,7 @@ import { sendEmail } from "@/actions/sendEmail";
 import toast from "react-hot-toast";
 import SectionHeading from "./section-heading";
 import SubmitBtn from "./submit-btn";
-import { FaDiscord, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaDiscord, FaInstagram, FaEnvelope } from "react-icons/fa";
 
 export default function Contact() {
   const { ref } = useSectionInView("Contato");
@@ -16,96 +16,109 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-      className="py-24 translate-y-4 transition-all duration-500 opacity-0"
+      className="py-24"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.8 }}
       viewport={{ once: true }}
     >
-      <div className="container mx-auto px-4 text-center">
-        <SectionHeading>Vamos Conversar</SectionHeading>
+      <div className="text-center">
+      <SectionHeading>Vamos Conversar</SectionHeading>
+      </div>
 
-        <p className="text-gray-700 -mt-6 dark:text-white/80">
-          Entre em contato comigo por este formulário ou através das minhas redes sociais.
+        <p className="text-center text-gray-600 dark:text-white/70 mt-2 mb-12">
+          Preencha o formulário ou fale comigo por uma das plataformas abaixo.
         </p>
 
-        <div className="flex flex-col gap-6 mt-10 max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto bg-white dark:bg-white/10 rounded-2xl shadow-xl p-8 md:p-10 backdrop-blur">
 
-          <motion.div
-  className="bg-white dark:bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center"
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
->
+          <form
+            className="flex flex-col gap-4"
+            action={async (formData: FormData) => {
+              const { error } = await sendEmail(formData);
+              if (error) {
+                toast.error(error);
+                return;
+              }
+              toast.success("Mensagem enviada com sucesso!");
+            }}
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Seu nome"
+              required
+              maxLength={100}
+              className="h-12 px-4 rounded-xl border border-black/10 dark:border-white/10 
+            bg-white dark:bg-white/80 
+            text-black dark:text-black
+              transition outline-none"
+            />
 
-  <div className="flex gap-4">
-    <a
-      href="https://www.instagram.com/chazinhodociel/"
-      className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:scale-110 transition"
-    >
-      <FaInstagram className="text-xl" />
-    </a>
+            <input
+              name="senderEmail"
+              type="email"
+              required
+              maxLength={500}
+              placeholder="Seu e-mail"
+              className="h-12 px-4 rounded-xl border border-black/10 dark:border-white/10 
+            bg-white dark:bg-white/80 
+            text-black dark:text-black
+              transition outline-none"
 
-    <a
-      href="https://www.linkedin.com/in/sarah-dumitrache/"
-      className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:scale-110 transition"
-    >
-      <FaLinkedin className="text-xl" />
-    </a>
+            />
 
-    <a
-      href="https://discord.com/users/942126894478950530"
-      className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:scale-110 transition"
-    >
-      <FaDiscord className="text-xl" />
-    </a>
-  </div>
-</motion.div>
+            <textarea
+              name="message"
+              placeholder="Me conte suas ideias XD"
+              required
+              maxLength={5000}
+              className="min-h-[160px] px-4 py-3 rounded-xl border border-black/10 
+            bg-white dark:bg-white/80 
+            text-black dark:text-black
+              transition outline-none resize-none"
 
+            />
 
-          <div className="lg:col-span-2">
-            <form
-              className="bg-white dark:bg-white/10 p-8 rounded-lg shadow-lg mt-6 flex flex-col dark:text-black"
-              action={async (formData: FormData) => {
-                const { data, error } = await sendEmail(formData);
-                if (error) {
-                  toast.error(error);
-                  return;
-                }
-                toast.success("E-mail enviado com sucesso!");
-              }}
-            >
-              <input
-                type="text"
-                name="name"
-                placeholder="Seu Nome"
-                required
-                maxLength={100}
-                className="h-10 px-4 rounded-lg borderBlack dark:bg-white/80 dark:focus:bg-white transition-all dark:outline-none mb-3"
-              />
+            <SubmitBtn />
+          </form>
 
-              <input
-                className="h-10 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none mb-3"
-                name="senderEmail"
-                type="email"
-                required
-                maxLength={500}
-                placeholder="Seu E-mail"
-              />
-              
-              <textarea
-                className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-                name="message"
-                placeholder="Sua Mensagem"
-                required
-                maxLength={5000}
-              />
-              <SubmitBtn />
-            </form>
+          <div className="my-10 h-px bg-black/10 dark:bg-white/10" />
+
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-sm text-gray-600 dark:text-white/70">
+              Ou me encontre por aqui!
+            </p>
+
+            <div className="flex gap-6">
+              <a
+                href="mailto:dumitrachebusiness@gmail.com"
+                className="flex items-center gap-2 text-sm hover:opacity-70 transition"
+              >
+                <FaEnvelope className="text-lg" />
+                Email
+              </a>
+
+              <a
+                href="https://www.instagram.com/chazinhodociel/"
+                target="_blank"
+                className="flex items-center gap-2 text-sm hover:opacity-70 transition"
+              >
+                <FaInstagram className="text-lg" />
+                Instagram
+              </a>
+
+              <a
+                href="https://discord.com/users/942126894478950530"
+                target="_blank"
+                className="flex items-center gap-2 text-sm hover:opacity-70 transition"
+              >
+                <FaDiscord className="text-lg" />
+                Discord
+              </a>
+            </div>
           </div>
         </div>
-      </div>
     </motion.section>
   );
 }
