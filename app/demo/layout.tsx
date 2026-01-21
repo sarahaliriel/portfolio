@@ -22,7 +22,6 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
             <div className="flex flex-col items-center justify-center text-center px-6">
               {children}
             </div>
-            <ThemeSwitch />
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
       </body>
