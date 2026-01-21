@@ -106,14 +106,39 @@
     Available at: http://localhost:3000
   </samp>
 </div>
+<br>
+
+<div align="center">
+  <samp>
+    <b>
+      Credits & Inspiration
+    </b>
+  </samp>
+  <br>
+  <br>
+
+  <samp>
+    This portfolio was built based on and inspired by a YouTube tutorial that helped me understand <br>
+    the structure, animations, and best practices for a modern Next.js portfolio.
+    <br><br>
+    The project was then customized, expanded, and adapted to reflect <br>
+    my own design choices, features, and personal identity.
+    <br><br>
+    Full credit and thanks to the original creator:
+    <br>
+    <a href="https://youtu.be/sUKptmUVIBM?si=MPImmHR28B2Xaig5" target="_blank">
+      YouTube Tutorial
+    </a>
+  </samp>
+</div>
 
 <br>
 
 <div align="center">
   <samp>
-    ♡ <a href="https://github.com/sarahaliriel">github</a> ⊹
-    <a href="https://www.linkedin.com/in/sarahdumitrache">linkedin</a> ⊹
-    <a href="mailto:dumitrachebusiness@gmail.com">email</a> ♡
+    ♡ <a href="https://www.linkedin.com/in/sarahdumitrache">linkedin</a> ⊹
+    <a href="mailto:dumitrachebusiness@gmail.com">email</a> ⊹
+    <a href="https://discord.com/users/942126894478950530">discord</a> ♡
   </samp>
 </div>
 
