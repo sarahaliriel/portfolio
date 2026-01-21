@@ -68,6 +68,15 @@ const dictionary: Dict = {
   "footer.skills": { pt: "Skills", en: "Skills" },
   "footer.experience": { pt: "Experiência", en: "Experience" },
   "footer.contact": { pt: "Contato", en: "Contact" },
+  "footer.navHeading": { pt: "Navegação", en: "Navigation" },
+  "footer.statusHeading": { pt: "Status", en: "Status" },
+  "footer.role": { pt: "Front End Developer.", en: "Front End Developer." },
+  "footer.statusLine": { pt: "Aberta a oportunidades e colaborações.", en: "Open to opportunities and collaborations." },
+  "footer.statusBody": { pt: "Se você tem uma ideia, projeto ou vaga, vamos conversar!", en: "If you have an idea, a project, or a role, let’s talk!" },
+  "footer.rights": { pt: "Todos os direitos reservados.", en: "All rights reserved." },
+  "footer.made": { pt: "Feito com ♡ e código.", en: "Made with ♡ and code." },
+  "footer.email": { pt: "Email", en: "Email" },
+
 };
 
 type LanguageContextType = {
