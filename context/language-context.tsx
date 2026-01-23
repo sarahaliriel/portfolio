@@ -35,8 +35,8 @@ const dictionary: Dict = {
   "about.card3.title": { pt: "Propósito", en: "Purpose" },
   "about.card3.desc": { pt: "Soluções úteis com foco na experiência real.", en: "Useful solutions focused on real experience." },
   "about.cta": {
-    pt: "Se você procura alguém que une design, código e propósito, talvez a gente combine!",
-    en: "If you’re looking for someone who blends design, code, and purpose, we might be a great match!",
+    pt: "Se você procura alguém que une código, design e propósito, talvez a gente combine!",
+    en: "If you’re looking for someone who blends code, design, and purpose, we might be a great match!",
   },
 
   "projects.heading": { pt: "Projetos", en: "Projects" },
@@ -112,7 +112,7 @@ const dictionary: Dict = {
   "footer.statusHeading": { pt: "Status", en: "Status" },
   "footer.role": { pt: "Front End Developer.", en: "Front End Developer." },
   "footer.statusLine": { pt: "Aberta a oportunidades e colaborações.", en: "Open to opportunities and collaborations." },
-  "footer.statusBody": { pt: "Se você tem uma ideia, projeto ou vaga, vamos conversar!", en: "If you have an idea, a project, or a role, let’s talk!" },
+  "footer.statusBody": { pt: "Se você tem uma ideia ou projeto, vamos conversar!", en: "If you have an idea or a project, let’s talk!" },
   "footer.rights": { pt: "Todos os direitos reservados.", en: "All rights reserved." },
   "footer.made": { pt: "Feito com ♡ e código.", en: "Made with ♡ and code." },
   "footer.email": { pt: "Email", en: "Email" },
