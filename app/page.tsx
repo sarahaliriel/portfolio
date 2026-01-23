@@ -5,6 +5,7 @@ import Intro from "@/components/intro";
 import Projects from "@/components/projects";
 import SectionDivider from "@/components/section-divider";
 import Skills from "@/components/skills";
+import Community from "@/components/community";
 
 const Experience = dynamic(() => import("@/components/experience"), {
   ssr: false,
@@ -20,6 +21,7 @@ export default function Home() {
       <Projects />
       <Skills />
       <Experience />
+      <Community />
       <Contact />
     </main>
   );

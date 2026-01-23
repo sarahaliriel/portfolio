@@ -8,7 +8,7 @@ import type { StaticImageData } from "next/image";
 
 export type Lang = "pt" | "en";
 
-export type SectionId = "home" | "about" | "projects" | "skills" | "experience" | "contact";
+export type SectionId = "home" | "about" | "projects" | "skills" | "experience" | "community" | "contact";
 
 type Section = {
   id: SectionId;
@@ -22,6 +22,7 @@ export const sections: readonly Section[] = [
   { id: "projects", hash: "#projects", label: { pt: "Projetos", en: "Projects" } },
   { id: "skills", hash: "#skills", label: { pt: "Skills", en: "Skills" } },
   { id: "experience", hash: "#experience", label: { pt: "Experiência", en: "Experience" } },
+  { id: "community", hash: "#community", label: { pt: "Comunidade", en: "Community" } },
   { id: "contact", hash: "#contact", label: { pt: "Contato", en: "Contact" } },
 ];
 

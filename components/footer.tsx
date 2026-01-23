@@ -14,15 +14,17 @@ export default function Footer() {
     { label: t("footer.projects"), href: "#projects" },
     { label: t("footer.skills"), href: "#skills" },
     { label: t("footer.experience"), href: "#experience" },
+    { label: t("footer.community"), href: "#community" },
     { label: t("footer.contact"), href: "#contact" },
   ];
 
   const socials = [
+    { label: "Discord", href: "https://discord.com/users/942126894478950530", icon: <FaDiscord /> },
     { label: "GitHub", href: "https://github.com/sarahaliriel", icon: <FaGithub /> },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/sarahdumitrache", icon: <FaLinkedin /> },
     { label: t("footer.email"), href: "mailto:dumitrachebusiness@gmail.com", icon: <FaEnvelope /> },
     { label: "Instagram", href: "https://www.instagram.com/chazinhodociel/", icon: <FaInstagram /> },
-    { label: "Discord", href: "https://discord.com/users/942126894478950530", icon: <FaDiscord /> },
+    { label: t("footer.community"), href: "https://discord.gg/NFsS9NXNPm", icon: <FaDiscord /> },
   ];
 
   return (

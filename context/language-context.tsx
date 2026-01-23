@@ -35,8 +35,8 @@ const dictionary: Dict = {
   "about.card3.title": { pt: "Propósito", en: "Purpose" },
   "about.card3.desc": { pt: "Soluções úteis com foco na experiência real.", en: "Useful solutions focused on real experience." },
   "about.cta": {
-    pt: "Se você procura alguém que une design, código e propósito, talvez a gente combine.",
-    en: "If you’re looking for someone who blends design, code, and purpose, we might be a great match.",
+    pt: "Se você procura alguém que une design, código e propósito, talvez a gente combine!",
+    en: "If you’re looking for someone who blends design, code, and purpose, we might be a great match!",
   },
 
   "projects.heading": { pt: "Projetos", en: "Projects" },
@@ -48,6 +48,45 @@ const dictionary: Dict = {
   "skills.heading": { pt: "Skills", en: "Skills" },
 
   "experience.heading": { pt: "Experiência", en: "Experience" },
+
+  "nav.community": { pt: "Comunidade", en: "Community" },
+
+  "community.heading": { pt: "Comunidade", en: "Community" },
+
+  "community.badgeMembers": { pt: "+13K Members", en: "13K+ Members" },
+  "community.badgeChat": { pt: "Networking & Ajuda", en: "Networking & Help" },
+  "community.badgeActive": { pt: "Ativa diariamente", en: "Active daily" },
+
+  "community.desc": {
+    pt: "Uma comunidade para programadores aprenderem, trocarem ideias, tirarem dúvidas e evoluírem juntos. Se você quer se enturmar, conhecer pessoas da área e participar de conversas técnicas, esse é o lugar <3",
+    en: "A community where developers learn, share ideas, ask questions, and grow together. If you want to meet people in tech, join discussions, and learn with others, this is the place <3",
+  },
+
+  "community.ctaJoin": { pt: "Entrar", en: "Join" },
+  "community.ctaHow": { pt: "Como funciona?", en: "How it works?" },
+  "community.note": { pt: "Discord • canais, ajuda e networking", en: "Discord • channels, help & networking" },
+
+  "community.modalTitle": { pt: "O que você encontra lá:", en: "What you’ll find there:" },
+  "community.modalSubtitle": { pt: "Um ambiente leve, útil e focado em evolução.", en: "A friendly space focused on real growth." },
+  "community.modalClose": { pt: "Fechar", en: "Close" },
+
+  "community.card1Title": { pt: "Dúvidas & suporte", en: "Questions & support" },
+  "community.card1Body": { pt: "Peça ajuda, responda alguém e aprenda mais rápido.", en: "Ask for help, help others, and learn faster." },
+
+  "community.card2Title": { pt: "Networking real", en: "Real networking" },
+  "community.card2Body": { pt: "Conheça devs, faça conexões e colabore em projetos.", en: "Meet devs, connect, and collaborate on projects." },
+
+  "community.card3Title": { pt: "Conversas técnicas", en: "Tech discussions" },
+  "community.card3Body": { pt: "Participe de debates e acompanhe novidades da área.", en: "Join debates and keep up with industry topics." },
+
+  "community.card4Title": { pt: "Ambiente organizado", en: "Organized space" },
+  "community.card4Body": { pt: "Moderação ativa e canais bem estruturados.", en: "Active moderation and well-structured channels." },
+
+  "community.modalFooter": {
+    pt: "Se quiser, entra e começa pelo canal de apresentações!",
+    en: "If you want, join and start with the introductions channel!",
+  },
+
 
   "contact.heading": { pt: "Vamos Conversar", en: "Let’s Talk" },
   "contact.subtitle": {
@@ -67,6 +106,7 @@ const dictionary: Dict = {
   "footer.projects": { pt: "Projetos", en: "Projects" },
   "footer.skills": { pt: "Skills", en: "Skills" },
   "footer.experience": { pt: "Experiência", en: "Experience" },
+  "footer.community": { pt: "Comunidade", en: "Community" },
   "footer.contact": { pt: "Contato", en: "Contact" },
   "footer.navHeading": { pt: "Navegação", en: "Navigation" },
   "footer.statusHeading": { pt: "Status", en: "Status" },
