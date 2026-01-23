@@ -2,11 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-* {
-  cursor: none !important;
-}
-
-@media (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   * {
     cursor: none !important;
   }
@@ -66,19 +62,11 @@ html.dark {
   background-size: 24px 24px;
 
   mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    black 0%,
-    black 55%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
 }
 
 .dark .bg-dots::before {
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.12) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
 }
 
 @keyframes fadeIn {
@@ -271,41 +259,34 @@ html.dark .bg-blob--blend {
   opacity: 0.12;
   mix-blend-mode: overlay;
   animation: grainMove 7s steps(2) infinite;
-  background-image: radial-gradient(
-      circle at 20% 30%,
-      rgba(0, 0, 0, 0.12) 0.5px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at 70% 80%,
-      rgba(0, 0, 0, 0.1) 0.6px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at 40% 60%,
-      rgba(0, 0, 0, 0.08) 0.7px,
-      transparent 1px
-    );
+  background-image: radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.12) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.1) 0.6px, transparent 1px),
+    radial-gradient(circle at 40% 60%, rgba(0, 0, 0, 0.08) 0.7px, transparent 1px);
   background-size: 140px 140px, 180px 180px, 220px 220px;
 }
 
 html.dark .bg-grain {
   opacity: 0.1;
-  background-image: radial-gradient(
-      circle at 20% 30%,
-      rgba(255, 255, 255, 0.1) 0.5px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at 70% 80%,
-      rgba(255, 255, 255, 0.08) 0.6px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at 40% 60%,
-      rgba(255, 255, 255, 0.06) 0.7px,
-      transparent 1px
-    );
+  background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0.6px, transparent 1px),
+    radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.06) 0.7px, transparent 1px);
+}
+
+@media (max-width: 640px), (pointer: coarse) {
+  .bg-grain {
+    display: none;
+  }
+
+  .bg-blob {
+    filter: blur(8rem) saturate(1.2);
+    opacity: 0.85;
+  }
+
+  .bg-blob--1,
+  .bg-blob--2,
+  .bg-blob--3 {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

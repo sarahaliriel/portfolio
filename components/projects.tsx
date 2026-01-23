@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useRef, useState, useCallback } from "react"
 import SectionHeading from "./section-heading";
 import { getProjectsData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useMotionValueEvent } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
@@ -174,14 +174,19 @@ export default function Projects() {
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
+
+  useMotionValueEvent(p, "change", (latest) => {
+    const idx = clamp(Math.floor(latest * total), 0, total - 1);
+    if (idx !== activeIndexRef.current) {
+      activeIndexRef.current = idx;
+      setActiveIndex(idx);
+    }
+  });
 
   useEffect(() => {
-    const unsub = p.on("change", (latest) => {
-      const idx = clamp(Math.floor(latest * total), 0, total - 1);
-      setActiveIndex(idx);
-    });
-    return () => unsub();
-  }, [p, total]);
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
   const active = items[activeIndex];
 

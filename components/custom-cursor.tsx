@@ -12,25 +12,41 @@ export default function CustomCursor() {
   const openTimer = useRef<NodeJS.Timeout | null>(null);
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const media = window.matchMedia("(pointer: fine)");
-    const onChange = () => setEnabled(media.matches);
+  const raf = useRef<number | null>(null);
+  const x = useRef(0);
+  const y = useRef(0);
 
-    setEnabled(media.matches);
-    media.addEventListener("change", onChange);
+  useEffect(() => {
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const update = () => setEnabled(finePointer.matches && !reduced.matches);
+
+    update();
+
+    finePointer.addEventListener("change", update);
+    reduced.addEventListener("change", update);
 
     return () => {
-      media.removeEventListener("change", onChange);
+      finePointer.removeEventListener("change", update);
+      reduced.removeEventListener("change", update);
     };
   }, []);
 
   useEffect(() => {
     if (!enabled) return;
 
+    const tick = () => {
+      raf.current = null;
+      const el = cursorRef.current;
+      if (!el) return;
+      el.style.transform = `translate3d(${x.current}px, ${y.current}px, 0) translate(-50%, -50%)`;
+    };
+
     const move = (e: PointerEvent) => {
-      if (!cursorRef.current) return;
-      cursorRef.current.style.left = `${e.clientX}px`;
-      cursorRef.current.style.top = `${e.clientY}px`;
+      x.current = e.clientX;
+      y.current = e.clientY;
+      if (raf.current == null) raf.current = requestAnimationFrame(tick);
     };
 
     const addView = () => {
@@ -73,14 +89,12 @@ export default function CustomCursor() {
       if (!target) return;
 
       const from = target.closest?.('[data-cursor="view"]');
-      const to = (e.relatedTarget as HTMLElement | null)?.closest?.(
-        '[data-cursor="view"]'
-      );
+      const to = (e.relatedTarget as HTMLElement | null)?.closest?.('[data-cursor="view"]');
 
       if (from && !to) removeView();
     };
 
-    window.addEventListener("pointermove", move);
+    window.addEventListener("pointermove", move, { passive: true });
     document.addEventListener("pointerover", onPointerOver, true);
     document.addEventListener("pointerout", onPointerOut, true);
 
@@ -91,6 +105,7 @@ export default function CustomCursor() {
 
       if (openTimer.current) clearTimeout(openTimer.current);
       if (closeTimer.current) clearTimeout(closeTimer.current);
+      if (raf.current != null) cancelAnimationFrame(raf.current);
     };
   }, [enabled]);
 
@@ -99,24 +114,12 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      style={{ transform: "translate(-50%, -50%)" }}
       className={`
         fixed top-0 left-0 z-[9999] pointer-events-none
         flex items-center justify-center rounded-full
         transition-[width,height,background-color] duration-300 ease-out
-        ${
-          isHovering
-            ? `
-              w-16 h-10
-              bg-[#101c3d]
-              dark:bg-[#AA9D8D]
-            `
-            : `
-              w-3 h-3
-              bg-[#101c3d]
-              dark:bg-[#AA9D8D]
-            `
-        }
+        ${isHovering ? "w-16 h-10" : "w-3 h-3"}
+        bg-[#101c3d] dark:bg-[#AA9D8D]
       `}
     >
       <span
