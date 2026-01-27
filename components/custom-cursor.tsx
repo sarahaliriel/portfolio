@@ -16,22 +16,35 @@ export default function CustomCursor() {
   const x = useRef(0);
   const y = useRef(0);
 
-  useEffect(() => {
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+useEffect(() => {
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const update = () => setEnabled(finePointer.matches && !reduced.matches);
+  const update = () => {
+    const shouldEnable = finePointer.matches && !reduced.matches;
+    setEnabled(shouldEnable);
 
-    update();
+    if (shouldEnable) {
+      document.documentElement.classList.add("cursor-hidden");
+      document.body.style.cursor = "none";
+    } else {
+      document.documentElement.classList.remove("cursor-hidden");
+      document.body.style.cursor = "auto";
+    }
+  };
 
-    finePointer.addEventListener("change", update);
-    reduced.addEventListener("change", update);
+  update();
 
-    return () => {
-      finePointer.removeEventListener("change", update);
-      reduced.removeEventListener("change", update);
-    };
-  }, []);
+  finePointer.addEventListener("change", update);
+  reduced.addEventListener("change", update);
+
+  return () => {
+    finePointer.removeEventListener("change", update);
+    reduced.removeEventListener("change", update);
+    document.documentElement.classList.remove("cursor-hidden");
+    document.body.style.cursor = "auto";
+  };
+}, []);
 
   useEffect(() => {
     if (!enabled) return;
@@ -50,11 +63,7 @@ export default function CustomCursor() {
     };
 
     const addView = () => {
-      if (closeTimer.current) {
-        clearTimeout(closeTimer.current);
-        closeTimer.current = null;
-      }
-
+      if (closeTimer.current) clearTimeout(closeTimer.current);
       setIsHovering(true);
 
       if (openTimer.current) clearTimeout(openTimer.current);
@@ -64,11 +73,7 @@ export default function CustomCursor() {
     };
 
     const removeView = () => {
-      if (openTimer.current) {
-        clearTimeout(openTimer.current);
-        openTimer.current = null;
-      }
-
+      if (openTimer.current) clearTimeout(openTimer.current);
       setShowLabel(false);
 
       if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -80,17 +85,12 @@ export default function CustomCursor() {
     const onPointerOver = (e: PointerEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
-      const hit = target.closest?.('[data-cursor="view"]');
-      if (hit) addView();
+      if (target.closest('[data-cursor="view"]')) addView();
     };
 
     const onPointerOut = (e: PointerEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const from = target.closest?.('[data-cursor="view"]');
-      const to = (e.relatedTarget as HTMLElement | null)?.closest?.('[data-cursor="view"]');
-
+      const from = (e.target as HTMLElement | null)?.closest('[data-cursor="view"]');
+      const to = (e.relatedTarget as HTMLElement | null)?.closest('[data-cursor="view"]');
       if (from && !to) removeView();
     };
 
@@ -105,7 +105,7 @@ export default function CustomCursor() {
 
       if (openTimer.current) clearTimeout(openTimer.current);
       if (closeTimer.current) clearTimeout(closeTimer.current);
-      if (raf.current != null) cancelAnimationFrame(raf.current);
+      if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, [enabled]);
 

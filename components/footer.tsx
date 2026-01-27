@@ -21,7 +21,7 @@ export default function Footer() {
   const socials = [
     { label: "Discord", href: "https://discord.com/users/942126894478950530", icon: <FaDiscord /> },
     { label: "GitHub", href: "https://github.com/sarahaliriel", icon: <FaGithub /> },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/sarahdumitrache", icon: <FaLinkedin /> },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/sarah-dumitrache", icon: <FaLinkedin /> },
     { label: t("footer.email"), href: "mailto:dumitrachebusiness@gmail.com", icon: <FaEnvelope /> },
     { label: "Instagram", href: "https://www.instagram.com/chazinhodociel/", icon: <FaInstagram /> },
     { label: t("footer.community"), href: "https://discord.gg/NFsS9NXNPm", icon: <FaDiscord /> },

@@ -2,17 +2,22 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-}
-
 html {
   --line-color: #101c3d;
   scroll-behavior: smooth;
   height: 100%;
   overflow-x: hidden;
+}
+
+html.cursor-hidden a,
+html.cursor-hidden button,
+html.cursor-hidden [role="button"],
+html.cursor-hidden input,
+html.cursor-hidden textarea,
+html.cursor-hidden select,
+html.cursor-hidden label,
+html.cursor-hidden summary {
+  cursor: inherit !important;
 }
 
 body {
