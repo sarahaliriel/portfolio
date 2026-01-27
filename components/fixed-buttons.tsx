@@ -32,8 +32,12 @@ export default function FixedButtons() {
         hide ? "opacity-0 translate-y-4 pointer-events-none" : "opacity-100 translate-y-0",
       ].join(" ")}
     >
-      <LanguageSwitch />
-      <ThemeSwitch />
+      <div className="ios-no-blur">
+        <LanguageSwitch />
+      </div>
+      <div className="ios-no-blur">
+        <ThemeSwitch />
+      </div>
     </div>
   );
 }

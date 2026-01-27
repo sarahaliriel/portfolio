@@ -20,6 +20,13 @@ html.cursor-hidden summary {
   cursor: inherit !important;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .ios-no-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
 body {
   height: 100%;
   overflow-x: hidden;

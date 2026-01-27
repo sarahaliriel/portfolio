@@ -31,7 +31,7 @@ export default function Footer() {
     <footer id="footer" className="relative mt-16">
       <div className="pointer-events-none absolute inset-x-0 -top-10 h-10 bg-gradient-to-b from-transparent via-black/[0.04] to-transparent dark:via-white/[0.06]" />
 
-      <div className="border-t border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl">
+      <div className="border-t border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl ios-no-blur">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <div className="md:col-span-5">
